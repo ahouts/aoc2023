@@ -1,0 +1,7 @@
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+number = @{ ASCII_DIGIT+ }
+color = @{ ASCII_ALPHA+ }
+item = { number ~ color }
+bag = { item ~ ( "," ~ item )* }
+game = { "Game" ~ number ~ ":" ~ bag ~ ( ";" ~ bag )* }
+file = { SOI ~ game* ~ EOI }
