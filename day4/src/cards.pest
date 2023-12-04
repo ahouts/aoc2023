@@ -1,0 +1,6 @@
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+number = @{ ASCII_DIGIT+ }
+winning = { number+ }
+guesses = { number+ }
+card = { "Card" ~ number ~ ":" ~ winning ~ "|" ~ guesses }
+file = { SOI ~ card* ~ EOI }
