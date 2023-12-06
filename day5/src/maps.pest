@@ -1,0 +1,6 @@
+WHITESPACE = _{ " " | "\t" | "\r" | "\n" }
+number = @{ ASCII_DIGIT+ }
+word = @{ ASCII_ALPHA+ }
+map = { word ~ "-to-" ~ word ~ "map:" ~ (number ~ number ~ number)+ }
+seeds = { "seeds:" ~ number+ }
+file = { SOI ~ seeds ~ map+ ~ EOI }

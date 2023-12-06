@@ -1,0 +1,11 @@
+[package]
+name = "day5"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1"
+pest = "2"
+pest_derive = "2"
+intervallum = "1"
+gcollections = "1"
