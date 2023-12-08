@@ -290,9 +290,6 @@ fn part2(hands: &[Hand]) -> Result<usize> {
         .collect::<Vec<_>>();
     hands.sort_by_key(|(key, _)| *key);
     hands.reverse();
-    for (_, hand) in &hands {
-        println!("{:?} - {:?}", hand.cards, hand.joker_kind())
-    }
     Ok(hands
         .into_iter()
         .enumerate()
