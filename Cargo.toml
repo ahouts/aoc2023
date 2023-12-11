@@ -9,4 +9,9 @@ members = [
     "day5",
     "day6",
     "day7",
+    "day8",
 ]
+
+[profile.release]
+debug = true
+overflow-checks = true
