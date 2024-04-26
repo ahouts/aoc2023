@@ -1,0 +1,7 @@
+
+tile = { "#" | "." }
+newline = _{ "\n" }
+row = { tile+ ~ newline }
+grid = { row+ ~ newline? }
+
+file = { grid+ }

@@ -160,6 +160,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "day13"
+version = "0.1.0"
+dependencies = [
+ "anyhow",
+ "pest",
+ "pest_derive",
+]
+
+[[package]]
 name = "day2"
 version = "0.1.0"
 dependencies = [
