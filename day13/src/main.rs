@@ -148,14 +148,12 @@ enum Direction {
     Vertical,
 }
 
-fn part1(fields: &[Field]) -> Result<usize> {
+fn do_part<T>(
+    fields: impl Iterator<Item = T>,
+    part: impl Fn(T) -> Result<(Direction, usize)>,
+) -> Result<usize> {
     fields
-        .iter()
-        .map(|field| {
-            field
-                .find_reflection(|_, _| true)
-                .with_context(|| anyhow!("unable to find reflection for:\n{field:?}"))
-        })
+        .map(part)
         .map(|res| {
             res.map(|(direction, dist)| match direction {
                 Direction::Horizontal => 100 * dist,
@@ -165,21 +163,20 @@ fn part1(fields: &[Field]) -> Result<usize> {
         .sum::<Result<usize>>()
 }
 
+fn part1(fields: &[Field]) -> Result<usize> {
+    do_part(fields.iter(), |field| {
+        field
+            .find_reflection(|_, _| true)
+            .with_context(|| anyhow!("unable to find reflection for:\n{field:?}"))
+    })
+}
+
 fn part2(fields: &mut [Field]) -> Result<usize> {
-    fields
-        .iter_mut()
-        .map(|field| {
-            field
-                .find_smudge_reflection()
-                .with_context(|| anyhow!("unable to find smudge reflection for:\n{field:?}"))
-        })
-        .map(|res| {
-            res.map(|(direction, dist)| match direction {
-                Direction::Horizontal => 100 * dist,
-                Direction::Vertical => dist,
-            })
-        })
-        .sum::<Result<usize>>()
+    do_part(fields.iter_mut(), |field| {
+        field
+            .find_smudge_reflection()
+            .with_context(|| anyhow!("unable to find smudge reflection for:\n{field:?}"))
+    })
 }
 
 fn main() -> Result<()> {
