@@ -27,6 +27,9 @@ fn parse() -> Result<Vec<Field>> {
             }
             g.push(r);
         }
+        if g.is_empty() {
+            continue;
+        }
         result.push(Field { data: g });
     }
 
