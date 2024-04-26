@@ -85,12 +85,12 @@ impl Field {
             direction: Direction,
         ) -> Option<(Direction, usize)> {
             for pivot in 1..size {
-                if iter
-                    .clone()
-                    .map(|segment| segment.rev().skip(size - pivot))
-                    .zip(iter.clone().map(|segment| segment.skip(pivot)))
-                    .all(|(li, ri)| li.zip(ri).all(|(l, r)| l == r))
-                    && predicate(direction, pivot)
+                if predicate(direction, pivot)
+                    && iter
+                        .clone()
+                        .map(|segment| segment.rev().skip(size - pivot))
+                        .zip(iter.clone().map(|segment| segment.skip(pivot)))
+                        .all(|(li, ri)| li.zip(ri).all(|(l, r)| l == r))
                 {
                     return Some((direction, pivot));
                 }
